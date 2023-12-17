@@ -9,16 +9,19 @@ const secretkey = "bkdbsa4546sn";
 
 
 
-router.get('/',async(req,res,next)=>{
+router.post('/',async(req,res,next)=>{
     console.log("vcxvxcv");
-    const barierToken = req
+    const barierToken = req;
+    const roletype = req.body.role;
+
+    console.log("roletype",roletype);
     // console.log("tttt",barierToken?.headers?.authorization)
     const isValid =  verifyToken(barierToken?.headers) 
     console.log('isValid',isValid);
       if (isValid) {
         console.log("valided"); 
         // const users =   await collection.find({});
-        const alladmins = await userData.find({role:"admin"},{
+        const alladmins = await userData.find({role:roletype},{
             "_id": 1,
             "email": 1,
             "firstName":1,
